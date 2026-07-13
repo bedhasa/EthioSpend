@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FB">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivWallet"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_agenda"
+            app:tint="#1A1A1A"
+            android:contentDescription="Wallet" />
+
+        <TextView
+            android:id="@+id/tvAppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/app_name"
+            android:textColor="#1A1A1A"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivSettingsTop"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_manage"
+            app:tint="#1A1A1A"
+            android:contentDescription="Settings"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:layout_below="@id/header">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Balance Section -->
+            <LinearLayout
+                android:id="@+id/balanceSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvLabelBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.1"
+                    android:text="@string/total_balance"
+                    android:textColor="#757575"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvBalanceAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ETB 0.00"
+                    android:textColor="#000000"
+                    android:textSize="44sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:cardBackgroundColor="#D1FADF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:text="↗ +12.5%"
+                        android:textColor="#027A48"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Charts Section -->
+            <LinearLayout
+                android:id="@+id/layoutCharts"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_below="@id/balanceSection"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <!-- Line Chart: Trends -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardLineChart"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1.5"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/tvTrendTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Trends"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"/>
+                        
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lineChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/tvTrendTitle"
+                            android:layout_marginTop="4dp" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Pie Chart: Categories -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardPieChart"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp">
+                         <TextView
+                            android:id="@+id/tvAllocTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Categories"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A1A1A"/>
+
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/tvAllocTitle"
+                            android:layout_marginTop="4dp" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Recent Header -->
+            <RelativeLayout
+                android:id="@+id/recentHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutCharts"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recent_transactions"
+                    android:textColor="#1A1A1A"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/see_all"
+                    android:textColor="#757575"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <!-- Transaction List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recentHeader"
+                android:nestedScrollingEnabled="false" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <!-- FAB Menu -->
+    <LinearLayout
+        android:id="@+id/fabMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <!-- Expense Option -->
+        <LinearLayout
+            android:id="@+id/layoutAddExpense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_expense"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:textColor="#C62828"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:src="@android:drawable/ic_delete"
+                app:backgroundTint="#F44336"
+                app:tint="#FFFFFF"
+                android:contentDescription="Add Expense"/>
+        </LinearLayout>
+
+        <!-- Income Option -->
+        <LinearLayout
+            android:id="@+id/layoutAddIncome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_income"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:textColor="#2E7D32"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:src="@android:drawable/ic_input_add"
+                app:backgroundTint="#4CAF50"
+                app:tint="#FFFFFF"
+                android:contentDescription="Add Income"/>
+        </LinearLayout>
+
+        <!-- Main FAB -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="#008000"
+            app:tint="#FFFFFF"
+            app:elevation="8dp"
+            android:contentDescription="Add"/>
+    </LinearLayout>
+
+    <!-- Bottom Nav -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/navPlan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_edit"
+                    app:tint="#757575"
+                    android:contentDescription="Plan" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/plan"
+                    android:textColor="#757575"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navReport"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:tint="#757575"
+                    android:contentDescription="Report" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/report"
+                    android:textColor="#757575"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navDashboard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@android:drawable/ic_menu_today"
+                    app:tint="#101828"
+                    android:contentDescription="Dashboard" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dashboard"
+                    android:textColor="#101828"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navHistory"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_recent_history"
+                    app:tint="#757575"
+                    android:contentDescription="History" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/history"
+                    android:textColor="#757575"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navSetting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_menu_manage"
+                    app:tint="#757575"
+                    android:contentDescription="Setting" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting"
+                    android:textColor="#757575"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Security Verification"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#101828"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please enter your 4-digit PIN to continue."
+        android:textColor="#667085"
+        android:layout_marginBottom="24dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etConfirmPin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="4-digit PIN"
+            android:inputType="numberPassword"
+            android:maxLength="4" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

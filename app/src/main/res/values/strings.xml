@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Ethiospand</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="forgot_pin">Forgot PIN</string>
+    <string name="total_balance">TOTAL BALANCE</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="see_all">See All</string>
+    <string name="add_income">Add Income</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="plan">Plan</string>
+    <string name="report">Report</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="history">History</string>
+    <string name="setting">Setting</string>
+    <string name="budget_planner">Budget Planner</string>
+    <string name="security">Security</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="sms_reading">SMS Reading</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="clear_data">Clear All Transactions</string>
+    <string name="about">About</string>
+    <string name="plan_settings">Plan Settings</string>
+    <string name="cycle_start_day">Cycle Start Day (1-31)</string>
+    <string name="spending_limit">Spending Limit (%)</string>
+    <string name="update_budget_plan">Update Budget Plan</string>
+    <string name="income_found">Income Found</string>
+    <string name="your_budget">Your Budget</string>
+    <string name="current_spending">Current Spending</string>
+    <string name="trends">Trends</string>
+    <string name="categories">Categories</string>
+    <string name="amharic_lang">Amharic Language</string>
+</resources>

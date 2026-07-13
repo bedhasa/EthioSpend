@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transaction Details"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#101828"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Person/Party Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Person / Reason"
+            android:inputType="textPersonName"
+            android:textColor="#101828"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Amount Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:prefixText="ETB "
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount"
+            android:inputType="numberDecimal"
+            android:textColor="#101828"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Date Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:startIconDrawable="@android:drawable/ic_menu_today"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:focusable="false"
+            android:clickable="true"
+            android:textColor="#101828"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Category Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="#667085"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:layout_marginBottom="8dp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="#D0D5DD">
+        <Spinner
+            android:id="@+id/spCategory"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingHorizontal="8dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Remarks Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@android:drawable/ic_menu_edit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRemarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Remarks (Optional)"
+            android:inputType="textAutoCorrect|textMultiLine"
+            android:textColor="#101828"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

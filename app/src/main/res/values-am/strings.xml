@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ኢትዮስፓንድ</string>
+    <string name="enter_pin">ፒን ያስገቡ</string>
+    <string name="forgot_pin">ፒን ረስተዋል?</string>
+    <string name="total_balance">ጠቅላላ ቀሪ ሂሳብ</string>
+    <string name="recent_transactions">የቅርብ ጊዜ ግብይቶች</string>
+    <string name="see_all">ሁሉንም ይመልከቱ</string>
+    <string name="add_income">ገቢ ያክሉ</string>
+    <string name="add_expense">ወጪ ያክሉ</string>
+    <string name="plan">እቅድ</string>
+    <string name="report">ሪፖርት</string>
+    <string name="dashboard">ዳሽቦርድ</string>
+    <string name="history">ታሪክ</string>
+    <string name="setting">ቅንጅቶች</string>
+    <string name="budget_planner">የበጀት እቅድ አውጪ</string>
+    <string name="security">ደህንነት</string>
+    <string name="change_pin">ፒን ይቀይሩ</string>
+    <string name="sms_reading">የኤስኤምኤስ ንባብ</string>
+    <string name="dark_mode">ጨለማ ሁነታ</string>
+    <string name="clear_data">ሁሉንም ግብይቶች ያጽዱ</string>
+    <string name="about">ስለ መተግበሪያው</string>
+    <string name="trends">አዝማሚያዎች</string>
+    <string name="categories">ምድቦች</string>
+    <string name="income_found">የተገኘ ገቢ</string>
+    <string name="your_budget">የእርስዎ በጀት</string>
+    <string name="current_spending">የአሁኑ ወጪ</string>
+    <string name="update_plan">እቅድ ያዘምኑ</string>
+    <string name="set_pin">4 አሃዝ ፒን ያዘጋጁ</string>
+    <string name="confirm_pin">ፒንዎን ያረጋግጡ</string>
+</resources>

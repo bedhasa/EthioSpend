@@ -9,6 +9,7 @@ import androidx.work.WorkerParameters;
 import java.util.List;
 
 public class DatabaseWorker extends Worker {
+    private static final String TAG = "EthiospandWorker";
 
     public DatabaseWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -20,42 +21,61 @@ public class DatabaseWorker extends Worker {
         String sender = getInputData().getString("sender");
         String messageBody = getInputData().getString("message_body");
 
-        Log.d("Ethiospand", "Worker processing SMS from: " + sender);
+        Log.d(TAG, "Worker processing SMS from: " + sender);
 
-        if (SmsParser.isBankSms(sender, messageBody)) {
+        if (!SmsParser.isBankSms(sender, messageBody)) {
+            return Result.success();
+        }
+
+        try {
             Transaction t = SmsParser.parseSms(messageBody);
+            TransactionDao dao = AppDatabase.getInstance(getApplicationContext()).transactionDao();
+
+            if (isDuplicate(dao, t)) {
+                Log.d(TAG, "Skipping duplicate SMS transaction: " + t.refNo);
+                return Result.success();
+            }
 
             TransactionEntity entity = new TransactionEntity(
                     t.type, t.amount, t.person, t.date, t.time, t.balance, t.refNo, "Bank SMS", ""
             );
-            
-            AppDatabase.getInstance(getApplicationContext()).transactionDao().insert(entity);
-            
-            // 1. Notify user about the specific transaction
+            dao.insert(entity);
+
             String title = t.type.equalsIgnoreCase("Income") ? "💰 Money Received" : "💸 New Expense";
             String msg = "ETB " + t.amount + " - " + t.person;
             NotificationHelper.showBudgetNotification(getApplicationContext(), title, msg);
+            checkBudgetAlerts(dao);
 
-            // 2. Check budget limits and notify if exceeded
-            checkBudgetAlerts();
-
-            // 3. Refresh UI if app is currently open
-            if (MainActivity.instance != null) {
-                MainActivity.instance.runOnUiThread(() -> MainActivity.instance.loadTransactions());
-            }
-            
             return Result.success();
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to process SMS transaction", e);
+            return Result.retry();
         }
-
-        return Result.failure();
     }
 
-    private void checkBudgetAlerts() {
-        // Unified preferences file "AppPrefs"
+    private boolean isDuplicate(TransactionDao dao, Transaction transaction) {
+        if (transaction.refNo != null
+                && !transaction.refNo.trim().isEmpty()
+                && !transaction.refNo.equalsIgnoreCase("N/A")
+                && dao.countByReference(transaction.refNo) > 0) {
+            return true;
+        }
+
+        return dao.countByTransactionFingerprint(
+                transaction.type,
+                transaction.amount,
+                transaction.person,
+                transaction.date,
+                transaction.time,
+                transaction.balance
+        ) > 0;
+    }
+
+    private void checkBudgetAlerts(TransactionDao dao) {
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         int spendPercent = prefs.getInt("spendPercent", 70);
         
-        List<TransactionEntity> transactions = AppDatabase.getInstance(getApplicationContext()).transactionDao().getAllTransactions();
+        List<TransactionEntity> transactions = dao.getAllTransactions();
         double incomeSum = 0;
         double expenseSum = 0;
 

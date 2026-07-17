@@ -104,15 +104,23 @@ public class SettingActivity extends AppCompatActivity {
 
                     if (SmsParser.isBankSms(address, body)) {
                         Transaction t = SmsParser.parseSms(body);
-                        // Check if already exists? For simplicity, we just insert. 
-                        // Room will ignore if we had a unique constraint, but we don't have one on refNo yet.
-                        // Let's at least check refNo to avoid duplicates.
-                        
-                        TransactionEntity entity = new TransactionEntity(
-                                t.type, t.amount, t.person, t.date, t.time, t.balance, t.refNo, "Bank SMS", ""
-                        );
-                        AppDatabase.getInstance(this).transactionDao().insert(entity);
-                        count++;
+                        TransactionDao dao = AppDatabase.getInstance(this).transactionDao();
+
+                        boolean duplicateByRef = t.refNo != null
+                                && !t.refNo.trim().isEmpty()
+                                && !t.refNo.equalsIgnoreCase("N/A")
+                                && dao.countByReference(t.refNo) > 0;
+                        boolean duplicateByFingerprint = dao.countByTransactionFingerprint(
+                                t.type, t.amount, t.person, t.date, t.time, t.balance
+                        ) > 0;
+
+                        if (!duplicateByRef && !duplicateByFingerprint) {
+                            TransactionEntity entity = new TransactionEntity(
+                                    t.type, t.amount, t.person, t.date, t.time, t.balance, t.refNo, "Bank SMS", ""
+                            );
+                            dao.insert(entity);
+                            count++;
+                        }
                     }
                 } while (cursor.moveToNext());
                 cursor.close();
